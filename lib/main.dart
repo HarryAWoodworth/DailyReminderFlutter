@@ -28,7 +28,10 @@ class CalendarEvent {
 }
 
 void main() {
-  runApp(const DailyReminderApp());
+  runApp(const MaterialApp(
+    title: "Daily Reminder",
+    home: DailyReminderApp(),
+  ));
 }
 
 class DailyReminderApp extends StatefulWidget {
@@ -106,7 +109,6 @@ class DailyReminderAppState extends State<DailyReminderApp> with WidgetsBindingO
     // }
   }
 
-
   //// Calendar Functions
 
   // Use `selectedDayPredicate` to determine which day is currently selected.
@@ -146,9 +148,6 @@ class DailyReminderAppState extends State<DailyReminderApp> with WidgetsBindingO
   }
 
   // Event loader
-
-
-  
   List<CalendarEvent> _getEventsForDay(DateTime day) {
     List<CalendarEvent> eventList = _eventSource[day] ?? [];
     return eventList;
@@ -181,15 +180,13 @@ class DailyReminderAppState extends State<DailyReminderApp> with WidgetsBindingO
   void _editEvent(CalendarEvent event) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const EventEditWidget()),
-    )
+      MaterialPageRoute(builder: (context) => EventEditWidget(event: event)),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "Daily Reminder App",
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: const Text('Daily Reminder App'),
         ),
@@ -267,8 +264,7 @@ class DailyReminderAppState extends State<DailyReminderApp> with WidgetsBindingO
             ),
           ],
         )
-      ),
-    );
+      );
   }
 }
 
@@ -279,9 +275,7 @@ class EventEditWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   return MaterialApp(
-     title: 'Edit Event',
-     home: Scaffold(
+   return Scaffold(
        appBar: AppBar(
          title: const Text('Daily Reminder App'),
        ),
@@ -296,8 +290,6 @@ class EventEditWidget extends StatelessWidget {
            ),
          ],
        )
-     ),
-   );
+     );
   }
-  
 }
